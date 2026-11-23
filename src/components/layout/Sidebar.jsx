@@ -33,7 +33,7 @@ export default function Sidebar({ open, onClose, variant = 'permanent', collapse
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-  const appName = import.meta.env.VITE_APP_NAME || import.meta.env.VITE_SHOP_NAME || 'Billing Software';
+  const appName = 'Billing Software';
 
   const effectiveCollapsed = variant === 'temporary' ? false : collapsed;
 
