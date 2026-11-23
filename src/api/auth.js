@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api';
 
+const REFRESH_TOKEN_KEY = 'erp_refresh_token';
+
 export const authAxios = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
@@ -33,9 +35,31 @@ async function get(url) {
 }
 
 const authApi = {
-  login: (email, password) => post('/auth/login', { email, password }),
-  logout: () => post('/auth/logout'),
-  refresh: () => post('/auth/refresh'),
+  login: async (email, password) => {
+    const data = await post('/auth/login', { email, password });
+    // Store refresh token in localStorage for cross-origin deployments
+    if (data?.refreshToken) {
+      localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
+    }
+    return data;
+  },
+  logout: async () => {
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+    try {
+      await post('/auth/logout', refreshToken ? { refreshToken } : {});
+    } finally {
+      localStorage.removeItem(REFRESH_TOKEN_KEY);
+    }
+  },
+  refresh: async () => {
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+    const data = await post('/auth/refresh', refreshToken ? { refreshToken } : {});
+    // Rotate stored refresh token
+    if (data?.refreshToken) {
+      localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
+    }
+    return data;
+  },
   me: () => get('/auth/me').then((d) => d.user),
   setup: (data) => post('/auth/setup', data).then((d) => ({ message: 'Admin created successfully', user: d.user })),
 };
