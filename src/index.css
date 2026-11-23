@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    @apply bg-gray-50 text-gray-800;
+  }
+}
+
+@layer components {
+  /* ── Form inputs ── */
+  .input {
+    @apply w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition;
+  }
+  .input-sm {
+    @apply w-full px-2.5 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition;
+  }
+  .input-error {
+    @apply border-red-400 focus:ring-red-400;
+  }
+  .label {
+    @apply block text-xs font-semibold text-gray-600 mb-1;
+  }
+  .error-msg {
+    @apply text-xs text-red-500 mt-1;
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .btn-lg {
+    @apply px-5 py-3 text-base;
+  }
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+  .btn-secondary {
+    @apply btn bg-secondary-DEFAULT text-white hover:bg-secondary-dark focus:ring-secondary-DEFAULT;
+  }
+  .btn-outline {
+    @apply btn border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-gray-400;
+  }
+  .btn-outline-primary {
+    @apply btn border border-primary-600 bg-white text-primary-600 hover:bg-primary-50 focus:ring-primary-500;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  }
+  .btn-danger-outline {
+    @apply btn border border-red-400 bg-white text-red-600 hover:bg-red-50 focus:ring-red-400;
+  }
+  .btn-warning {
+    @apply btn bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-400;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-600 hover:bg-gray-100 focus:ring-gray-400;
+  }
+  .icon-btn {
+    @apply inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition focus:outline-none;
+  }
+
+  /* ── Card / Paper ── */
+  .card {
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm;
+  }
+
+  /* ── Badge / Chip ── */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold;
+  }
+  .badge-success   { @apply badge bg-green-100 text-green-800; }
+  .badge-error     { @apply badge bg-red-100 text-red-800; }
+  .badge-warning   { @apply badge bg-yellow-100 text-yellow-800; }
+  .badge-info      { @apply badge bg-blue-100 text-blue-800; }
+  .badge-default   { @apply badge bg-gray-100 text-gray-700; }
+  .badge-primary   { @apply badge bg-primary-100 text-primary-700; }
+
+  /* ── Table ── */
+  .table-wrapper {
+    @apply overflow-x-auto;
+  }
+  .data-table {
+    @apply w-full text-sm border-collapse;
+  }
+  .data-table thead tr {
+    @apply bg-primary-600 text-white;
+  }
+  .data-table thead th {
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wide;
+  }
+  .data-table tbody tr {
+    @apply border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition-colors;
+  }
+  .data-table tbody tr:nth-child(even) {
+    @apply bg-gray-50/50;
+  }
+  .data-table tbody td {
+    @apply px-4 py-3;
+  }
+
+  /* ── Modal overlay ── */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4;
+  }
+  .modal-box {
+    @apply bg-white rounded-2xl shadow-2xl w-full max-h-[90vh] flex flex-col overflow-hidden;
+  }
+  .modal-header {
+    @apply flex items-center justify-between px-6 py-4 border-b border-gray-200 shrink-0;
+  }
+  .modal-body {
+    @apply px-6 py-4 overflow-y-auto flex-1;
+  }
+  .modal-footer {
+    @apply px-6 py-4 border-t border-gray-200 flex justify-end gap-2 shrink-0;
+  }
+}
+
+/* ── Thermal receipt styles ── */
+.thermal-receipt {
+  box-sizing: border-box;
+  width: 80mm;
+  padding: 4mm;
+  background: #fff;
+  color: #111;
+  font: 10pt/1.3 Arial, sans-serif;
+}
+.receipt-header { text-align: center; }
+.receipt-header h1 { margin: 0 0 1mm; font-size: 12pt; line-height: 1.15; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+.receipt-hours { margin-top: 3mm; padding-top: 2mm; border-top: 1px dashed #888; text-align: center; font-size: 8pt; line-height: 1.25; }
+.receipt-rule { margin: 2.5mm 0; border-top: 1px dashed #555; }
+.receipt-meta { display: grid; gap: 1mm; font-size: 9pt; overflow-wrap: anywhere; }
+.receipt-items { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9pt; }
+.receipt-items th { padding: 1.5mm 0; border-bottom: 1px solid #555; text-align: left; }
+.receipt-items th:nth-child(2), .receipt-item-detail td:nth-child(2) { width: 11mm; text-align: center; }
+.receipt-items th:last-child, .receipt-money { width: 24mm; text-align: right; white-space: nowrap; }
+.receipt-item + .receipt-item { border-top: 1px dotted #bbb; }
+.receipt-product { padding-top: 2mm; font-weight: 700; overflow-wrap: anywhere; }
+.receipt-item-detail td { padding: .5mm 0; overflow-wrap: anywhere; }
+.receipt-rate { color: #444; font-size: 8pt; }
+.receipt-totals { display: grid; gap: 1mm; font-size: 9pt; }
+.receipt-totals > div { display: flex; justify-content: space-between; gap: 3mm; }
+.receipt-grand-total { padding-top: 1.5mm; border-top: 1px solid #555; font-size: 12pt; font-weight: 800; }
+.receipt-notes { margin-top: 3mm; padding-top: 2mm; border-top: 1px dotted #888; font-size: 8pt; overflow-wrap: anywhere; }
+.receipt-footer { margin-top: 4mm; text-align: center; font-size: 9pt; font-weight: 700; }
+
+@media print {
+  @page { margin: 0; }
+  html, body, #root { width: 80mm !important; min-width: 0 !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  body * { visibility: hidden !important; }
+  #invoice-print-area, #invoice-print-area * { visibility: visible !important; }
+  #invoice-print-area { position: fixed !important; left: 0 !important; top: 0 !important; z-index: 999999 !important; width: 80mm !important; max-width: 80mm !important; margin: 0 !important; padding: 4mm !important; box-shadow: none !important; border: 0 !important; border-radius: 0 !important; }
+  #invoice-print-area * { color: #111 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .receipt-toolbar { display: none !important; }
+}
